@@ -1,0 +1,64 @@
+~  can accept range values (high, medium, low). Example: using analogWrite() function
+
+str.toInt();     //convert to integer
+str.toDouble();  //convert to double or ::atof(str.c_str());
+String(intValue);  //convert to string
+std::fill_n(arrayName, size, 0);  //Clear the array
+
+
+Firebase ESP8266 Describtion:
+https://github.com/mobizt/Firebase-ESP8266/blob/master/README.md
+https://github.com/mobizt/Firebase-ESP8266
+https://arduino-esp8266.readthedocs.io/en/latest/exception_causes.html
+
+//Optional, set number of error retry
+ Firebase.setMaxRetry(firebaseData, 3);
+
+//Optional, use classic HTTP GET and POST requests. 
+//This option allows get and delete functions (PUT and DELETE HTTP requests) works for 
+//device connected behind the Firewall that allows only GET and POST requests.   
+Firebase.enableClassicRequest(firebaseData, true);
+
+
+android firebase get one child objects data:
+https://stackoverflow.com/questions/30564735/android-firebase-simply-get-one-child-objects-data
+https://stackoverflow.com/questions/50445865/query-firebase-database-with-limit
+
+Dial:
+*#*#2846579#*#*
+
+get current date and time using ESP8266:
+https://forum.arduino.cc/index.php?topic=452680.0
+
+
+fuzzy library for arduino "Describtion"
+https://blog.zerokol.com/2012/09/arduinofuzzy-fuzzy-library-for-arduino.html?m=1
+
+FuzzyRuleAntecedent *ifTemperatureHighAndSoilMoistureHigh = new FuzzyRuleAntecedent();
+ifTemperatureHighAndSoilMoistureHigh->joinWithAND(high1, high2);
+
+FuzzyRuleConsequent *thenWaterAmountLess = new FuzzyRuleConsequent();
+thenWaterAmountLess->addOutput(less);
+
+FuzzyRule *fuzzyRule1 = new FuzzyRule(1, ifTemperatureHighAndSoilMoistureHigh, thenWaterAmountLess);
+fuzzy->addFuzzyRule(fuzzyRule1);
+
+// Building FuzzyRule
+FuzzyRuleAntecedent *ifTemperatureMediumAndSoilMoistureHigh = new FuzzyRuleAntecedent();
+ifTemperatureMediumAndSoilMoistureHigh->joinWithAND(medium1, high2);
+
+FuzzyRuleConsequent *thenWaterAmountLess1 = new FuzzyRuleConsequent();
+thenWaterAmountLess1->addOutput(less);
+
+FuzzyRule *fuzzyRule2 = new FuzzyRule(2, ifTemperatureMediumAndSoilMoistureHigh, thenWaterAmountLess1);
+fuzzy->addFuzzyRule(fuzzyRule2);
+
+
+DeserializationOption::NestingLimit(5)
+json example:
+https://github.com/bblanchon/ArduinoJson/blob/6.x/examples/JsonParserExample/JsonParserExample.ino
+
+convert string to character:
+https://www.geeksforgeeks.org/convert-string-char-array-cpp/
+
+
