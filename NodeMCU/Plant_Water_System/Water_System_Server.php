@@ -171,9 +171,19 @@ else
 			$x2y = $x2y - $x2Total * $yTotal / $N;
 			$x1x2 = $x1x2 - $x1Total * $x2Total / $N;
 			
-			$b1 = ($x2SquareTotal * $x1y - $x1x2 * $x2y) / ($x1SquareTotal * $x2SquareTotal - $x1x2 * $x1x2);
-			$b2 = ($x1SquareTotal * $x2y - $x1x2 * $x1y) / ($x1SquareTotal * $x2SquareTotal - $x1x2 * $x1x2);
+			if(($x1SquareTotal * $x2SquareTotal - $x1x2 * $x1x2)==0)
+				$b1 = 0;
+			else
+				$b1 = ($x2SquareTotal * $x1y - $x1x2 * $x2y) / ($x1SquareTotal * $x2SquareTotal - $x1x2 * $x1x2);
+			if(($x1SquareTotal * $x2SquareTotal - $x1x2 * $x1x2)==0)
+				$b2 = 0;
+			else
+				$b2 = ($x1SquareTotal * $x2y - $x1x2 * $x1y) / ($x1SquareTotal * $x2SquareTotal - $x1x2 * $x1x2);
 			$b0 = $yMean - $b1 * $x1Mean - $b2 * $x2Mean;
+			
+			/*$b1 = ($x2SquareTotal * $x1y - $x1x2 * $x2y) / ($x1SquareTotal * $x2SquareTotal - $x1x2 * $x1x2);
+			$b2 = ($x1SquareTotal * $x2y - $x1x2 * $x1y) / ($x1SquareTotal * $x2SquareTotal - $x1x2 * $x1x2);
+			$b0 = $yMean - $b1 * $x1Mean - $b2 * $x2Mean;*/
 			
 			$query = "SELECT avg(temp_level) AS average FROM trends ORDER BY trend_id DESC LIMIT 5;";
 			$result = mysqli_query($link, $query);
