@@ -9,7 +9,7 @@ if(!$link)
 	die("Unable to connect".mysqli_error($link));
 else
 {
-    if(isset($_POST['COMPUTE_WATER_AMOUNT_CBR']))
+    if(isset($_POST['COMPUTE_WATER_AMOUNT_CBR'])) //Case Based Reasoning
     {
         date_default_timezone_set("Asia/Muscat");
         
@@ -115,7 +115,7 @@ else
 			echo json_encode(array("water_amount"=>$water_amount));
 		}
     }
-	elseif(isset($_POST['COMPUTE_WATER_AMOUNT_MLR']))
+	elseif(isset($_POST['COMPUTE_WATER_AMOUNT_MLR'])) //Multiple Linear Regression
     {
 		$plant_id = $_POST['plant_id'];
         $date_time = date("Y-m-d H:i:s");
