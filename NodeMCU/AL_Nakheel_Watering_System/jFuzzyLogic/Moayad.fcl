@@ -1,0 +1,55 @@
+FUNCTION_BLOCK Moayad
+
+   VAR_INPUT
+      Temperature : REAL;
+      SoilMoisture : REAL;
+   END_VAR
+
+   VAR_OUTPUT
+      WaterAmount : REAL;
+   END_VAR
+
+   FUZZIFY Temperature
+      TERM low := (0,1) (10,1) (25,0);
+      TERM medium := (15,0) (25,1) (35,0);
+      TERM high := (25,0) (40,1) (50,1);
+   END_FUZZIFY
+
+   FUZZIFY SoilMoisture
+      TERM low := (0,1) (20,1) (50,0);
+      TERM medium := (30,0) (50,1) (70,0);
+      TERM high := (50,0) (80,1) (100,1);
+   END_FUZZIFY
+
+   DEFUZZIFY WaterAmount
+	  TERM minimum := (0,1) (14,1) (35,0);
+	  TERM veryless := (14,0) (35,1) (59,0);
+	  TERM less := (35,0) (59,1) (86,0);
+	  TERM littleless := (59,0) (86,1) (113,0);
+	  TERM medium := (86,0) (113,1) (140,0);
+	  TERM littlemore := (113,0) (140,1) (168,0);
+	  TERM more := (140,0) (168,1) (195,0);
+	  TERM muchmore := (168,0) (195,1) (222,0);
+	  TERM maximum := (195,0) (222,1) (250,1);
+	  METHOD : COG;
+	  DEFAULT := 0;
+	  RANGE := (0 .. 250);
+	END_DEFUZZIFY
+
+   RULEBLOCK processing
+      AND : MIN;
+      ACT : MIN;
+      ACCU: MAX;
+
+      RULE 1 : IF(Temperature IS high) AND (SoilMoisture IS high) THEN WaterAmount IS less;
+      RULE 2 : IF(Temperature IS medium) AND (SoilMoisture IS high) THEN WaterAmount IS veryless;
+	  RULE 3 : IF(Temperature IS low) AND (SoilMoisture IS high) THEN WaterAmount IS minimum;
+	  RULE 4 : IF(Temperature IS high) AND (SoilMoisture IS medium) THEN WaterAmount IS littlemore;
+      RULE 5 : IF(Temperature IS high) AND (SoilMoisture IS low) THEN WaterAmount IS maximum;
+      RULE 6 : IF(Temperature IS medium) AND (SoilMoisture IS low) THEN WaterAmount IS muchmore;
+      RULE 7 : IF(Temperature IS medium) AND (SoilMoisture IS medium) THEN WaterAmount IS medium;
+      RULE 8 : IF(Temperature IS low) AND (SoilMoisture IS medium) THEN WaterAmount IS littleless;
+      RULE 9 : IF(Temperature IS low) AND (SoilMoisture IS low) THEN WaterAmount IS more;
+   END_RULEBLOCK
+
+END_FUNCTION_BLOCK

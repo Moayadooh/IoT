@@ -10,10 +10,10 @@
 #define FIREBASE_AUTH ""
 #define FIREBASE_FCM_SERVER_KEY ""
 #define ROOT_URL ""
-#define HOST_NAME ""
-#define USERNAME ""
+#define HOST_NAME "localhost"
+#define USERNAME "root"
 #define PASSWORD ""
-#define DB_NAME ""
+#define DB_NAME "palm"
 #define TZ       -5  //(utc+) TZ in hours
 #define DST_MN   60 //use 60mn for summer time in some countries
 #define TZ_SEC  ((TZ)*3600)
@@ -21,6 +21,7 @@
 
 FirebaseData firebaseData;
 HTTPClient http;
+WiFiClient client;
 time_t now;
 
 bool connectionRequest = false, disconnectionRequest = false, Connected = false, tempSensorRunning = false, soilSensorRunning = false, palmAgeUpdated = false, systemStoped = false;
@@ -517,7 +518,7 @@ void PrintSensorsStatus()
 //Store temperature, soil moisture, water amount, and date & time in the database
 void StoreData()
 {
-  http.begin(ROOT_URL);
+  http.begin(client, ROOT_URL);
   http.addHeader("Content-Type", "application/x-www-form-urlencoded");
   
   String data = "temp_level="+String(temperature) +"&soil_mois_level="+String(soilMoisture) +"&water_amount="+String(waterAmount) +"&insert=1"
@@ -539,7 +540,7 @@ void StoreData()
 //Retrieve average of last 5 records from database
 int RetrieveData()
 {
-  http.begin(ROOT_URL);
+  http.begin(client, ROOT_URL);
   http.addHeader("Content-Type", "application/x-www-form-urlencoded");
   
   String data = "hostname="+String(HOST_NAME) +"&username="+String(USERNAME) +"&password="+String(PASSWORD) +"&dbname="+String(DB_NAME) +"&retrieve=1";
