@@ -3,3 +3,5 @@ Node MCU ESP8266
 Installing ESP8266 NodeMCU Board in Arduino IDE 2 (Windows, Mac OS X, Linux)
 https://randomnerdtutorials.com/installing-esp8266-nodemcu-arduino-ide-2-0/
 https://arduino.esp8266.com/stable/package_esp8266com_index.json
+
+Board Manager --> esp8266 by ESP8266 Community 3.1.2
